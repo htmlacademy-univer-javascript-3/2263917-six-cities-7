@@ -1,4 +1,4 @@
-import { OfferCard } from '../components/OfferCard';
+import { OfferCard } from '../../components/offer-card/offer-card';
 
 type MainPageProps = {
   offersCount: number;
