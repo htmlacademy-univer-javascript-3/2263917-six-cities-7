@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
+import { AppRoute } from '../../const/routes';
 
 type PrivateRouteProps = {
   children: ReactNode;
@@ -8,7 +9,7 @@ type PrivateRouteProps = {
 
 export const PrivateRoute = ({ children, isAuthorized }: PrivateRouteProps) => {
   if (!isAuthorized) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={AppRoute.Login} replace />;
   }
   return children;
 };
