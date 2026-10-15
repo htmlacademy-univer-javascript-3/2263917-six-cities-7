@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/routes';
+import { ReviewForm } from '../../components/review-form/review-form';
+
 export const OfferPage = () => (
   <div className="page">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className="header__logo-link" href="main.html">
+            <Link className="header__logo-link" to={AppRoute.Main}>
               <img
                 alt="6 cities logo"
                 className="header__logo"
@@ -12,26 +16,26 @@ export const OfferPage = () => (
                 src="img/logo.svg"
                 width="81"
               />
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a
+                <Link
                   className="header__nav-link header__nav-link--profile"
-                  href="#"
+                  to={AppRoute.Main}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name">
                   Oliver.conner@gmail.com
                   </span>
                   <span className="header__favorite-count">3</span>
-                </a>
+                </Link>
               </li>
               <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
+                <Link className="header__nav-link" to={AppRoute.Main}>
                   <span className="header__signout">Sign out</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -158,7 +162,7 @@ export const OfferPage = () => (
               </div>
               <div className="offer__description">
                 <p className="offer__text">
-                A quiet cozy and picturesque that hides behind a a river by the
+                A quiet cozy and picturesque that hides behind Link Link river by the
                 unique lightness of Amsterdam. The building is green and from
                 18th century.
                 </p>
@@ -199,7 +203,7 @@ export const OfferPage = () => (
                       </div>
                     </div>
                     <p className="reviews__text">
-                    A quiet cozy and picturesque that hides behind a a river by
+                    A quiet cozy and picturesque that hides behind Link Link river by
                     the unique lightness of Amsterdam. The building is green and
                     from 18th century.
                     </p>
@@ -209,114 +213,7 @@ export const OfferPage = () => (
                   </div>
                 </li>
               </ul>
-              <form action="#" className="reviews__form form" method="post">
-                <label className="reviews__label form__label" htmlFor="review">
-                Your review
-                </label>
-                <div className="reviews__rating-form form__rating">
-                  <input
-                    className="form__rating-input visually-hidden"
-                    defaultValue="5"
-                    id="5-stars"
-                    name="rating"
-                    type="radio"
-                  />
-                  <label
-                    className="reviews__rating-label form__rating-label"
-                    htmlFor="5-stars"
-                    title="perfect"
-                  >
-                    <svg className="form__star-image" height="33" width="37">
-                      <use xlinkHref="#icon-star" />
-                    </svg>
-                  </label>
-                  <input
-                    className="form__rating-input visually-hidden"
-                    defaultValue="4"
-                    id="4-stars"
-                    name="rating"
-                    type="radio"
-                  />
-                  <label
-                    className="reviews__rating-label form__rating-label"
-                    htmlFor="4-stars"
-                    title="good"
-                  >
-                    <svg className="form__star-image" height="33" width="37">
-                      <use xlinkHref="#icon-star" />
-                    </svg>
-                  </label>
-                  <input
-                    className="form__rating-input visually-hidden"
-                    defaultValue="3"
-                    id="3-stars"
-                    name="rating"
-                    type="radio"
-                  />
-                  <label
-                    className="reviews__rating-label form__rating-label"
-                    htmlFor="3-stars"
-                    title="not bad"
-                  >
-                    <svg className="form__star-image" height="33" width="37">
-                      <use xlinkHref="#icon-star" />
-                    </svg>
-                  </label>
-                  <input
-                    className="form__rating-input visually-hidden"
-                    defaultValue="2"
-                    id="2-stars"
-                    name="rating"
-                    type="radio"
-                  />
-                  <label
-                    className="reviews__rating-label form__rating-label"
-                    htmlFor="2-stars"
-                    title="badly"
-                  >
-                    <svg className="form__star-image" height="33" width="37">
-                      <use xlinkHref="#icon-star" />
-                    </svg>
-                  </label>
-                  <input
-                    className="form__rating-input visually-hidden"
-                    defaultValue="1"
-                    id="1-star"
-                    name="rating"
-                    type="radio"
-                  />
-                  <label
-                    className="reviews__rating-label form__rating-label"
-                    htmlFor="1-star"
-                    title="terribly"
-                  >
-                    <svg className="form__star-image" height="33" width="37">
-                      <use xlinkHref="#icon-star" />
-                    </svg>
-                  </label>
-                </div>
-                <textarea
-                  className="reviews__textarea form__textarea"
-                  id="review"
-                  name="review"
-                  placeholder="Tell how was your stay, what you like and what can be improved"
-                />
-                <div className="reviews__button-wrapper">
-                  <p className="reviews__help">
-                  To submit review please make sure to set{' '}
-                    <span className="reviews__star">rating</span> and describe
-                  your stay with at least{' '}
-                    <b className="reviews__text-amount">50 characters</b>.
-                  </p>
-                  <button
-                    className="reviews__submit form__submit button"
-                    disabled
-                    type="submit"
-                  >
-                  Submit
-                  </button>
-                </div>
-              </form>
+              <ReviewForm />
             </section>
           </div>
         </div>
@@ -330,7 +227,7 @@ export const OfferPage = () => (
           <div className="near-places__list places__list">
             <article className="near-places__card place-card">
               <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
+                <Link to={AppRoute.Main}>
                   <img
                     alt="Place image"
                     className="place-card__image"
@@ -338,7 +235,7 @@ export const OfferPage = () => (
                     src="img/room.jpg"
                     width="260"
                   />
-                </a>
+                </Link>
               </div>
               <div className="place-card__info">
                 <div className="place-card__price-wrapper">
@@ -371,14 +268,14 @@ export const OfferPage = () => (
                   </div>
                 </div>
                 <h2 className="place-card__name">
-                  <a href="#">Wood and stone place</a>
+                  <Link to={AppRoute.Main}>Wood and stone place</Link>
                 </h2>
                 <p className="place-card__type">Room</p>
               </div>
             </article>
             <article className="near-places__card place-card">
               <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
+                <Link to={AppRoute.Main}>
                   <img
                     alt="Place image"
                     className="place-card__image"
@@ -386,7 +283,7 @@ export const OfferPage = () => (
                     src="img/apartment-02.jpg"
                     width="260"
                   />
-                </a>
+                </Link>
               </div>
               <div className="place-card__info">
                 <div className="place-card__price-wrapper">
@@ -419,7 +316,7 @@ export const OfferPage = () => (
                   </div>
                 </div>
                 <h2 className="place-card__name">
-                  <a href="#">Canal View Prinsengracht</a>
+                  <Link to={AppRoute.Main}>Canal View Prinsengracht</Link>
                 </h2>
                 <p className="place-card__type">Apartment</p>
               </div>
@@ -429,7 +326,7 @@ export const OfferPage = () => (
                 <span>Premium</span>
               </div>
               <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
+                <Link to={AppRoute.Main}>
                   <img
                     alt="Place image"
                     className="place-card__image"
@@ -437,7 +334,7 @@ export const OfferPage = () => (
                     src="img/apartment-03.jpg"
                     width="260"
                   />
-                </a>
+                </Link>
               </div>
               <div className="place-card__info">
                 <div className="place-card__price-wrapper">
@@ -470,7 +367,7 @@ export const OfferPage = () => (
                   </div>
                 </div>
                 <h2 className="place-card__name">
-                  <a href="#">Nice, cozy, warm big bed apartment</a>
+                  <Link to={AppRoute.Main}>Nice, cozy, warm big bed apartment</Link>
                 </h2>
                 <p className="place-card__type">Apartment</p>
               </div>
