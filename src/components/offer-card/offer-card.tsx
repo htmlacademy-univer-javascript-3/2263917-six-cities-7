@@ -1,27 +1,46 @@
-export const OfferCard = () => (
-  <article className="cities__card place-card">
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/routes';
+import { getOfferRoute } from '../../const/routes';
+import { Offer } from '../../types/offer';
+
+type OfferCardProps = {
+  offer: Offer;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+};
+
+export const OfferCard = ({ offer, onMouseEnter, onMouseLeave }: OfferCardProps) => (
+  <article
+    className="cities__card place-card"
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
+    {offer.isPremium && (
+      <div className="place-card__mark">
+        <span>Premium</span>
+      </div>
+    )}
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <a href="#">
+      <Link to={AppRoute.Main}>
         <img
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/apartment-01.jpg"
+          src={offer.previewImage}
           width="260"
         />
-      </a>
+      </Link>
     </div>
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
-          <b className="place-card__price-value">€120</b>
+          <b className="place-card__price-value">&euro;{offer.price}</b>
           <span className="place-card__price-text">/ night</span>
         </div>
         <button
-          className="place-card__bookmark-button button"
+          className={`place-card__bookmark-button button${
+            offer.isFavorite ? ' place-card__bookmark-button--active' : ''
+          }`}
           type="button"
         >
           <svg
@@ -31,25 +50,21 @@ export const OfferCard = () => (
           >
             <use xlinkHref="#icon-bookmark" />
           </svg>
-          <span className="visually-hidden">To bookmarks</span>
+          <span className="visually-hidden">
+            {offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}
+          </span>
         </button>
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span
-            style={{
-              width: '80%',
-            }}
-          />
+          <span style={{ width: `${(offer.rating / 5) * 100}%` }} />
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">
-                    Beautiful & luxurious apartment at great location
-        </a>
+        <Link to={getOfferRoute(offer.id)}>{offer.title}</Link>
       </h2>
-      <p className="place-card__type">Apartment</p>
+      <p className="place-card__type">{offer.type}</p>
     </div>
   </article>
 );

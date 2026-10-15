@@ -1,16 +1,19 @@
-import { OfferCard } from '../../components/offer-card/offer-card';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/routes';
+import { OfferList } from '../../components/offer-list/offer-list';
+import { Offer } from '../../types/offer';
 
 type MainPageProps = {
-  offersCount: number;
+  offers: Offer[];
 };
 
-export const MainPage = ({ offersCount }: MainPageProps) => (
+export const MainPage = ({ offers }: MainPageProps) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className="header__logo-link header__logo-link--active">
+            <Link className="header__logo-link header__logo-link--active" to={AppRoute.Main}>
               <img
                 alt="6 cities logo"
                 className="header__logo"
@@ -18,26 +21,26 @@ export const MainPage = ({ offersCount }: MainPageProps) => (
                 src="img/logo.svg"
                 width="81"
               />
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a
+                <Link
                   className="header__nav-link header__nav-link--profile"
-                  href="#"
+                  to={AppRoute.Main}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name">
                   Oliver.conner@gmail.com
                   </span>
                   <span className="header__favorite-count">3</span>
-                </a>
+                </Link>
               </li>
               <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
+                <Link className="header__nav-link" to={AppRoute.Main}>
                   <span className="header__signout">Sign out</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -50,34 +53,34 @@ export const MainPage = ({ offersCount }: MainPageProps) => (
         <section className="locations container">
           <ul className="locations__list tabs__list">
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                 <span>Paris</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                 <span>Cologne</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                 <span>Brussels</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
+              <Link className="locations__item-link tabs__item tabs__item--active" to={AppRoute.Main}>
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                 <span>Hamburg</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                 <span>Dusseldorf</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </section>
@@ -86,7 +89,7 @@ export const MainPage = ({ offersCount }: MainPageProps) => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <form action="#" className="places__sorting" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -113,13 +116,7 @@ export const MainPage = ({ offersCount }: MainPageProps) => (
                 </li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
-            </div>
+            <OfferList offers={offers} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map" />
