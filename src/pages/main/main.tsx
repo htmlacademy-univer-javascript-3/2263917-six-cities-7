@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/routes';
 import { OfferList } from '../../components/offer-list/offer-list';
 import { Offer } from '../../types/offer';
+import { Map } from '../../components/map/map';
 
 type MainPageProps = {
   offers: Offer[];
@@ -119,7 +120,7 @@ export const MainPage = ({ offers }: MainPageProps) => (
             <OfferList offers={offers} />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map" />
+            <Map city={offers[0].city} offers={offers} />
           </div>
         </div>
       </div>
