@@ -3,15 +3,19 @@ import { AppRoute } from '../../const/routes';
 import { getOfferRoute } from '../../const/routes';
 import { Offer } from '../../types/offer';
 
+type OfferCardVariant = 'cities' | 'near-places';
+
 type OfferCardProps = {
   offer: Offer;
+  variant?: OfferCardVariant;
+  isActive?: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 };
 
-export const OfferCard = ({ offer, onMouseEnter, onMouseLeave }: OfferCardProps) => (
+export const OfferCard = ({ offer, variant = 'cities', isActive, onMouseEnter, onMouseLeave }: OfferCardProps) => (
   <article
-    className="cities__card place-card"
+    className={`${variant}__card place-card${isActive ? ' place-card--active' : ''}`}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >
@@ -20,18 +24,18 @@ export const OfferCard = ({ offer, onMouseEnter, onMouseLeave }: OfferCardProps)
         <span>Premium</span>
       </div>
     )}
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${variant}__image-wrapper place-card__image-wrapper`}>
       <Link to={AppRoute.Main}>
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={variant === 'near-places' ? '200' : '200'}
           src={offer.previewImage}
-          width="260"
+          width={variant === 'near-places' ? '260' : '260'}
         />
       </Link>
     </div>
-    <div className="place-card__info">
+    <div className={`${variant}__card-info place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{offer.price}</b>

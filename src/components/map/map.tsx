@@ -13,9 +13,10 @@ const defaultCustomIcon = new Icon({
 type MapProps = {
   city: City;
   offers: Offer[];
+  className?: string;
 };
 
-export const Map = ({ city, offers }: MapProps) => {
+export const Map = ({ city, offers, className = 'cities__map map' }: MapProps) => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -38,5 +39,5 @@ export const Map = ({ city, offers }: MapProps) => {
     }
   }, [map, offers]);
 
-  return <div className="cities__map map" ref={mapRef} />;
+  return <div className={className} ref={mapRef} />;
 };

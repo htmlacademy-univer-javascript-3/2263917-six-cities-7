@@ -12,9 +12,10 @@ import { Review } from '../../types/review';
 type AppProps = {
   offers: Offer[];
   reviews: Review[];
+  nearbyOffers: Offer[];
 };
 
-export const App = ({ offers, reviews }: AppProps) => (
+export const App = ({ offers, reviews, nearbyOffers }: AppProps) => (
   <BrowserRouter>
     <Routes>
       <Route path={AppRoute.Main} element={<MainPage offers={offers} />} />
@@ -27,7 +28,7 @@ export const App = ({ offers, reviews }: AppProps) => (
           </PrivateRoute>
         }
       />
-      <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews} />} />
+      <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews} nearbyOffers={nearbyOffers} />} />
       <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
     </Routes>
   </BrowserRouter>
