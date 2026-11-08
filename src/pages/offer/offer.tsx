@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/routes';
 import { ReviewForm } from '../../components/review-form/review-form';
+import { Review } from '../../types/review';
+import { ReviewList } from '../../components/review-list/review-list';
 
-export const OfferPage = () => (
+type OfferPageProps = {
+  reviews: Review[];
+};
+
+export const OfferPage = ({ reviews }: OfferPageProps) => (
   <div className="page">
     <header className="header">
       <div className="container">
@@ -174,45 +180,7 @@ export const OfferPage = () => (
               </div>
             </div>
             <section className="offer__reviews reviews">
-              <h2 className="reviews__title">
-              Reviews · <span className="reviews__amount">1</span>
-              </h2>
-              <ul className="reviews__list">
-                <li className="reviews__item">
-                  <div className="reviews__user user">
-                    <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                      <img
-                        alt="Reviews avatar"
-                        className="reviews__avatar user__avatar"
-                        height="54"
-                        src="img/avatar-max.jpg"
-                        width="54"
-                      />
-                    </div>
-                    <span className="reviews__user-name">Max</span>
-                  </div>
-                  <div className="reviews__info">
-                    <div className="reviews__rating rating">
-                      <div className="reviews__stars rating__stars">
-                        <span
-                          style={{
-                            width: '80%',
-                          }}
-                        />
-                        <span className="visually-hidden">Rating</span>
-                      </div>
-                    </div>
-                    <p className="reviews__text">
-                    A quiet cozy and picturesque that hides behind Link Link river by
-                    the unique lightness of Amsterdam. The building is green and
-                    from 18th century.
-                    </p>
-                    <time className="reviews__time" dateTime="2019-04-24">
-                    April 2019
-                    </time>
-                  </div>
-                </li>
-              </ul>
+              <ReviewList reviews={reviews} />
               <ReviewForm />
             </section>
           </div>
