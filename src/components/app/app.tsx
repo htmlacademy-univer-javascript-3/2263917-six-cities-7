@@ -18,7 +18,7 @@ type AppProps = {
 export const App = ({ offers, reviews, nearbyOffers }: AppProps) => (
   <BrowserRouter>
     <Routes>
-      <Route path={AppRoute.Main} element={<MainPage offers={offers} />} />
+      <Route path={AppRoute.Main} element={<MainPage />} />
       <Route path={AppRoute.Login} element={<LoginPage />} />
       <Route
         path={AppRoute.Favorites}
