@@ -1,129 +1,113 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/routes';
 import { OfferList } from '../../components/offer-list/offer-list';
-import { Offer } from '../../types/offer';
 import { Map } from '../../components/map/map';
+import { CityList } from '../../components/city-list/city-list';
+import { changeCity } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectCity, selectFilteredOffers } from '../../store/selectors';
+import { useState } from 'react';
+import { CITIES } from '../../const/const';
 
-type MainPageProps = {
-  offers: Offer[];
-};
+export const MainPage = () => {
+  const dispatch = useAppDispatch();
+  const activeCity = useAppSelector(selectCity);
+  const filteredOffers = useAppSelector(selectFilteredOffers);
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
-export const MainPage = ({ offers }: MainPageProps) => (
-  <div className="page page--gray page--main">
-    <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
-            <Link className="header__logo-link header__logo-link--active" to={AppRoute.Main}>
-              <img
-                alt="6 cities logo"
-                className="header__logo"
-                height="41"
-                src="img/logo.svg"
-                width="81"
-              />
-            </Link>
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link
-                  className="header__nav-link header__nav-link--profile"
-                  to={AppRoute.Main}
-                >
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__user-name user__name">
-                  Oliver.conner@gmail.com
-                  </span>
-                  <span className="header__favorite-count">3</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link className="header__nav-link" to={AppRoute.Main}>
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
-    <main className="page__main page__main--index">
-      <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                <span>Paris</span>
+  return (
+    <div className="page page--gray page--main">
+      <header className="header">
+        <div className="container">
+          <div className="header__wrapper">
+            <div className="header__left">
+              <Link className="header__logo-link header__logo-link--active" to={AppRoute.Main}>
+                <img
+                  alt="6 cities logo"
+                  className="header__logo"
+                  height="41"
+                  src="img/logo.svg"
+                  width="81"
+                />
               </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                <span>Cologne</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                <span>Brussels</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item tabs__item--active" to={AppRoute.Main}>
-                <span>Amsterdam</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                <span>Hamburg</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                <span>Dusseldorf</span>
-              </Link>
-            </li>
-          </ul>
-        </section>
-      </div>
-      <div className="cities">
-        <div className="cities__places-container container">
-          <section className="cities__places places">
-            <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
-            <form action="#" className="places__sorting" method="get">
-              <span className="places__sorting-caption">Sort by</span>
-              <span className="places__sorting-type" tabIndex={0}>
-              Popular
-                <svg className="places__sorting-arrow" height="4" width="7">
-                  <use xlinkHref="#icon-arrow-select" />
-                </svg>
-              </span>
-              <ul className="places__options places__options--custom places__options--opened">
-                <li
-                  className="places__option places__option--active"
-                  tabIndex={0}
-                >
-                Popular
+            </div>
+            <nav className="header__nav">
+              <ul className="header__nav-list">
+                <li className="header__nav-item user">
+                  <Link
+                    className="header__nav-link header__nav-link--profile"
+                    to={AppRoute.Main}
+                  >
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__user-name user__name">
+                    Oliver.conner@gmail.com
+                    </span>
+                    <span className="header__favorite-count">3</span>
+                  </Link>
                 </li>
-                <li className="places__option" tabIndex={0}>
-                Price: low to high
-                </li>
-                <li className="places__option" tabIndex={0}>
-                Price: high to low
-                </li>
-                <li className="places__option" tabIndex={0}>
-                Top rated first
+                <li className="header__nav-item">
+                  <Link className="header__nav-link" to={AppRoute.Main}>
+                    <span className="header__signout">Sign out</span>
+                  </Link>
                 </li>
               </ul>
-            </form>
-            <OfferList offers={offers} />
-          </section>
-          <div className="cities__right-section">
-            <Map city={offers[0].city} offers={offers} />
+            </nav>
           </div>
         </div>
-      </div>
-    </main>
-  </div>
-);
+      </header>
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            <CityList
+              activeCity={activeCity}
+              onCityChange={(city) => dispatch(changeCity(city))}
+            />
+          </section>
+        </div>
+        <div className="cities">
+          <div className="cities__places-container container">
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
+              <form action="#" className="places__sorting" method="get">
+                <span className="places__sorting-caption">Sort by</span>
+                <span className="places__sorting-type" tabIndex={0}>
+                Popular
+                  <svg className="places__sorting-arrow" height="4" width="7">
+                    <use xlinkHref="#icon-arrow-select" />
+                  </svg>
+                </span>
+                <ul className="places__options places__options--custom places__options--opened">
+                  <li
+                    className="places__option places__option--active"
+                    tabIndex={0}
+                  >
+                  Popular
+                  </li>
+                  <li className="places__option" tabIndex={0}>
+                  Price: low to high
+                  </li>
+                  <li className="places__option" tabIndex={0}>
+                  Price: high to low
+                  </li>
+                  <li className="places__option" tabIndex={0}>
+                  Top rated first
+                  </li>
+                </ul>
+              </form>
+              <OfferList
+                offers={filteredOffers}
+                activeOfferId={activeOfferId}
+                onOfferHover={setActiveOfferId}
+              />
+            </section>
+            <div className="cities__right-section">
+              <Map city={CITIES[activeCity]} offers={filteredOffers} />
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};

@@ -39,5 +39,11 @@ export const Map = ({ city, offers, className = 'cities__map map' }: MapProps) =
     }
   }, [map, offers]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    }
+  }, [map, city]);
+
   return <div className={className} ref={mapRef} />;
 };
